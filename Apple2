@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        :root {
+            --background-color: #0C0F15;
+        }
+
+        body {
+            background-color: var(--background-color);
+            height: 100vh;
+        }
+
+        .gallery {
+            display: flex;
+            height: 100%;
+        }
+
+        .left,
+        .right {
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        .inner {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            perspective: 500px;
+            transform-style: preserve-3d;
+        }
+
+        .item {
+            position: absolute;
+            width: 20rem;
+            height: 28rem;
+            border-radius: 20px;
+            transition: transform 300ms cubic-bezier(0, 0.55, 0.45, 1);
+        }
+
+        .left .inner {
+            perspective-origin: right center;
+        }
+
+        .right .inner {
+            perspective-origin: left center;
+        }
+
+        .left .item {
+            right: -10rem;
+        }
+
+        .right .item {
+            left: -10rem;
+        }
+
+        .left .item:nth-child(1) {
+            transform: translate3d(-10rem, 0, -4rem);
+        }
+
+        .left .item:nth-child(2) {
+            transform: translate3d(-20rem, 0, -8rem);
+        }
+
+        .left .item:nth-child(3) {
+            transform: translate3d(-30rem, 0, -12rem);
+        }
+
+        .left .item:nth-child(4) {
+            transform: translate3d(-40rem, 0, -16rem);
+        }
+
+        .left .item:nth-child(5) {
+            transform: translate3d(-50rem, 0, -20rem);
+        }
+
+        .left .item:nth-child(6) {
+            transform: translate3d(10rem, 0, -4rem);
+        }
+
+        .right .item:nth-child(1) {
+            transform: translate3d(10rem, 0, -4rem);
+        }
+
+        .right .item:nth-child(2) {
+            transform: translate3d(20rem, 0, -8rem);
+        }
+
+        .right .item:nth-child(3) {
+            transform: translate3d(30rem, 0, -12rem);
+        }
+
+        .right .item:nth-child(4) {
+            transform: translate3d(40rem, 0, -16rem);
+        }
+
+        .right .item:nth-child(5) {
+            transform: translate3d(50rem, 0, -20rem);
+        }
+
+        .right .item:nth-child(6) {
+            transform: translate3d(-10rem, 0, -4rem);
+        }
+
+        .card1 {
+            background: linear-gradient(180deg, #C04170 0%, #F6BA72 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+
+        .card2 {
+            background: linear-gradient(180deg, #0AB7D3 0%, #E4C494 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+
+        .card3 {
+            background: linear-gradient(180deg, #1F80DF 0%, #6CE0C9 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+
+        .card4 {
+            background: linear-gradient(180deg, #476BF5 0%, #ED8EA8 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+
+        .card5 {
+            background: linear-gradient(180deg, #1D2C63 0%, #8F64A0 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+
+        .card6 {
+            background: linear-gradient(180deg, #0D2B4E 0%, #208A94 100%);
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="left">
+        <div class="inner">
+            <div class="item card1" onclick="card1Clicked()" data-counter="1"></div>
+            <div class="item card2" onclick="card2Clicked()" data-counter="2"></div>
+            <div class="item card3" onclick="card3Clicked()" data-counter="3"></div>
+            <div class="item card4" onclick="card4Clicked()" data-counter="4"></div>
+            <div class="item card5" onclick="card5Clicked()" data-counter="5"></div>
+            <div class="item card6" onclick="card6Clicked()" data-counter="6"></div>
+        </div>
+        </div>
+    
+        <div class="right">
+        <div class="inner">
+            <div class="item card6" onclick="card6Clicked()" data-counter="1"></div>
+            <div class="item card5" onclick="card5Clicked()" data-counter="2"></div>
+            <div class="item card4" onclick="card4Clicked()" data-counter="3"></div>
+            <div class="item card3" onclick="card3Clicked()" data-counter="4"></div>
+            <div class="item card2" onclick="card2Clicked()" data-counter="5"></div>
+            <div class="item card1" onclick="card1Clicked()" data-counter="6"></div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function card1Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#C04170");
+        }
+
+        function card2Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#0AB7D3");
+        }
+
+        function card3Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#1F80DF");
+        }
+
+        function card4Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#476BF5");
+        }
+
+        function card5Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#1D2C63");
+        }
+
+        function card6Clicked() {
+            document.documentElement.style.setProperty('--background-color', "#0D2B4E");
+        }
+
+        const leftPerspectives = [
+            { x: -10, z: -4 },
+            { x: -30, z: -8 },
+            { x: -50, z: -12 },
+            { x: -70, z: -16 },
+            { x: -90, z: -20 },
+            { x: 10, z: -4 }
+        ];
+    
+        const rightPerspectives = [
+            { x: 10, z: -4 },
+            { x: 30, z: -8 },
+            { x: 50, z: -12 },
+            { x: 70, z: -16 },
+            { x: 90, z: -20 },
+            { x: -10, z: -4 }
+        ];
+    
+        const leftCards = document.querySelectorAll(".left .item");
+        const rightCards = document.querySelectorAll(".right .item");
+    
+        const translateImage = (target, p) => {
+        target.style.transform = `translate3d(${p.x}rem, 0, ${p.z}rem)`;
+        };
+    
+        const animateCards = (c, perspectives) => {
+        const count = parseInt(c.dataset.counter);
+        translateImage(c, perspectives[count - 1]);
+        c.dataset.counter = (count === 6 ? 1 : count + 1).toString();
+        };
+    
+        const loop = () => {
+            setInterval(() => {
+                leftCards.forEach((c) => {
+                animateCards(c, leftPerspectives);
+                });
+    
+                rightCards.forEach((c) => {
+                animateCards(c, rightPerspectives);
+                });
+            }, 1000);
+        };
+    
+        loop();
+    </script>
+</body>
+</html>
