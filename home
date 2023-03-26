@@ -70,7 +70,8 @@
       border-radius: 50%;
       background-color: #333;
       box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-      cursor: pointer;
+      cursor: move;
+      z-index: 10;
     }
 
     .building:hover {
@@ -162,11 +163,11 @@
         <div class="ring"></div>
         <div class="inner-circle"></div>
         <div class="outer-circle"></div>
-        <div class="building" onclick="clickBlackCircle()"></div>
+        <div id="dragMe" class="building"></div>
       </div>
       <div class="theater-container">
         <div class="theater"></div>
-        <div class="roof"></div>
+        <div id="dragTarget" class="roof"></div>
       </div>
       <div class="park-container">
         <div class="park"></div>
@@ -185,4 +186,54 @@
   function clickBlackCircle() {
     location.href = "Apple2.html";
   }
+
+  // The current position of mouse
+  let x = 0;
+  let y = 0;
+
+  // Query the element
+  const ele = document.getElementById('dragMe');
+  const target = document.getElementById('dragTarget');
+
+  // Handle the mousedown event
+  // that's triggered when user drags the element
+  const mouseDownHandler = function (e) {
+      // Get the current mouse position
+      x = e.clientX;
+      y = e.clientY;
+
+      // Attach the listeners to `document`
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+  };
+
+  const mouseMoveHandler = function (e) {
+      // How far the mouse has been moved
+      const dx = e.clientX - x;
+      const dy = e.clientY - y;
+
+      // Set the position of element
+      ele.style.top = `${ele.offsetTop + dy}px`;
+      ele.style.left = `${ele.offsetLeft + dx}px`;
+
+      // Reassign the position of mouse
+      x = e.clientX;
+      y = e.clientY;
+  };
+
+  const mouseUpHandler = function () {
+      // Remove the handlers of `mousemove` and `mouseup`
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+      
+      const eleRec = ele.getBoundingClientRect();
+      const targRec = target.getBoundingClientRect();
+      
+      if (eleRec.left >= targRec.left && eleRec.right <= targRec.right && eleRec.top >= targRec.top && eleRec.bottom <= eleRec.bottom) {
+        
+        location.href = "Loading.html";
+      }
+  };
+
+  ele.addEventListener('mousedown', mouseDownHandler);
 </script>
